@@ -1,0 +1,154 @@
+.surprise {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff69b4 0%, #ff8da1 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.surprise-content {
+  max-width: 800px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.surprise-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.surprise-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-container {
+  margin: 2rem 0;
+  min-height: 150px;
+}
+
+.typed-message {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.floating-hearts-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-heart {
+  position: absolute;
+  color: white;
+  font-size: 1.5rem;
+  opacity: 0.6;
+  animation: floatUpAndFade 5s ease-in infinite;
+}
+
+@keyframes floatUpAndFade {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) scale(1);
+    opacity: 0;
+  }
+}
+
+.surprise-footer {
+  margin-top: 3rem;
+}
+
+.music-player {
+  background: rgba(255, 105, 180, 0.1);
+  padding: 1rem;
+  border-radius: 30px;
+  display: inline-block;
+}
+
+.playlist-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.playlist-link:hover {
+  transform: scale(1.05);
+  color: #ff4081;
+}
+
+/* Additional animations */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.surprise-content::before,
+.surprise-content::after {
+  content: '✨';
+  position: absolute;
+  font-size: 2rem;
+  animation: sparkle 2s infinite;
+}
+
+.surprise-content::before {
+  top: 1rem;
+  left: 1rem;
+  animation-delay: 0.5s;
+}
+
+.surprise-content::after {
+  bottom: 1rem;
+  right: 1rem;
+  animation-delay: 1s;
+}
+
+@media (max-width: 768px) {
+  .surprise-content {
+    padding: 2rem;
+  }
+
+  .surprise-title {
+    font-size: 2.5rem;
+  }
+
+  .typed-message {
+    font-size: 1.2rem;
+  }
+
+  .playlist-link {
+    font-size: 1rem;
+  }
+} 
