@@ -7,12 +7,30 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+    sourcemap: false,
+    minify: 'terser',
     rollupOptions: {
       output: {
-        manualChunks: undefined
+        manualChunks: undefined,
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]'
+      }
+    },
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
       }
     }
   },
   publicDir: 'public',
-  base: '/'
+  base: '/',
+  server: {
+    port: 3000,
+    strictPort: true
+  },
+  preview: {
+    port: 3000,
+    strictPort: true
+  }
 })
