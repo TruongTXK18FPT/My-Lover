@@ -33,15 +33,21 @@ I love you, deeply and endlessly.
 Thank you for being the reason I believe in love.
 
 Forever yours,
-Trần Xuân Trường`
+Trần Xuân Trường`
   }
 ];
 
 const Letters = () => {
-  const [openLetterId, setOpenLetterId] = useState<number | null>(null);
+  const [selectedLetter, setSelectedLetter] = useState<Letter | null>(null);
 
-  const toggleLetter = (id: number) => {
-    setOpenLetterId(openLetterId === id ? null : id);
+  const openLetter = (letter: Letter) => {
+    setSelectedLetter(letter);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLetter = () => {
+    setSelectedLetter(null);
+    document.body.style.overflow = 'auto';
   };
 
   return (
@@ -51,24 +57,32 @@ const Letters = () => {
         {letters.map((letter) => (
           <div
             key={letter.id}
-            className={`letter ${openLetterId === letter.id ? 'open' : ''}`}
-            onClick={() => toggleLetter(letter.id)}
+            className="letter"
+            onClick={() => openLetter(letter)}
           >
             <div className="letter-front">
               <div className="letter-seal">♥</div>
               <h3 className="letter-date">{letter.date}</h3>
               <p className="letter-preview">Click to read...</p>
             </div>
-            <div className="letter-back">
+          </div>
+        ))}
+      </div>
+      {selectedLetter && (
+        <div className="letter-modal-overlay" onClick={closeLetter}>
+          <div className="letter-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="letter-modal-close" onClick={closeLetter}>×</button>
+            <div className="letter-modal-content">
+              <h2 className="letter-modal-date">{selectedLetter.date}</h2>
               <div className="letter-content">
-                {letter.content.split('\n\n').map((paragraph, index) => (
+                {selectedLetter.content.split('\n\n').map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}
               </div>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
       <div className="letters-footer">
         <p className="letters-quote">
           "Words are the voice of the heart."
